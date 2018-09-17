@@ -7,8 +7,8 @@ class Page {
     this.onChange = new Function(init.onChange);
     this.page = page;
 
-    this.prev = this.createItem('上一页', 'z__page-prev', 'button');
-    this.next = this.createItem('下一页', 'z__page-next', 'button');
+    this.prev = this.createItem('<', 'z__page-prev', 'button');
+    this.next = this.createItem('>', 'z__page-next', 'button');
   }
   createItem(text, className, type) {
     let tmp = document.createElement(type);
@@ -26,13 +26,12 @@ class Page {
     this.page.appendChild(this.next);
   }
   currentChange() {
+    this.next.removeAttribute ("disabled");
+    this.prev.removeAttribute ("disabled");
     if (this.current === 1) {
       this.prev.setAttribute("disabled", true);
     } else if (this.current === this.pageNum) {
       this.next.setAttribute("disabled", true);
-    } else {
-      this.next.removeAttribute ("disabled");
-      this.prev.removeAttribute ("disabled");
     }
     let tmp = this.page.querySelectorAll('.z__page-item');
     tmp.forEach(item => {
