@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>分页</title>
+  <style>
+    *  { padding: 0;margin: 0; }
+    .z__page {
+      display: flex;
+      justify-content: center;
+      color: #666;
+      line-height: 30px;
+      font-size: 14px;
+      align-items: center;
+    }
+    .z__page > .z__page-item, .z__page > .z__page-prev, .z__page > .z__page-next {
+      background: #fff;
+      border-radius: 5px;
+      border: 1px solid #dcdfe6;
+      cursor: pointer;
+    }
+    .z__page-item.active {
+      background: #409eff;
+      color: #fff;
+    }
+    .z__page-item.active:hover {
+      background: #409eff;
+      color: #fff;
+    }
+    .z__page-item {
+      height: 30px;
+      width: 30px;
+      text-align: center;
+      margin: 0 10px;
+    }
+    .z__page-item:hover, .z__page-prev:hover, .z__page-next:hover {
+      color: #409eff;
+      background-color: #ecf5ff;
+    }
+    .z__page-next {
+      margin-left: 10px;
+    }
+    .z__page-prev {
+      margin-right: 10px;
+    }
+    .z__page-next,
+    .z__page-prev {
+      height: 28px;
+      padding: 0 10px;
+      line-height: 28px;
+    }
+    .z__page-prev:disabled,
+    .z__page-next:disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .z__tab-item {
+      height: 200px;
+      margin: 20px;
+      background: #409eff;
+      color: #fff;
+      font-size: 50px;
+      text-align: center;
+      line-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <z-page style="margin-bottom: 100px;margin-top: 100px;" pageSize="10" total="36" onChange="console.log(arguments[0])"></z-page>
+
+  <z-page pageSize="5" total="140" onChange="console.log(arguments[0])"></z-page>
+  <script src="index.js"></script>
+</body>
+</html>
