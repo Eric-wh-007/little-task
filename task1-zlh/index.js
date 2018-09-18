@@ -38,7 +38,6 @@ app.all('*', (req, res, next) => {
   const { path } = req;
   console.log(`visit path ${path}`);
   if (!path.includes('login')) {
-    console.log('不是 login ');
     if (req.session.loginUser) {   // 如果有token 判断token是否过期
       const startTime = req.session.loginUser.startTime;
       const timeDifference = moment().diff(startTime, 'seconds');
