@@ -38,7 +38,8 @@ app.all('*', (req, res, next) => {
   const { path } = req;
   console.log(`visit path ${path}`);
   if (!path.includes('login')) {
-    if (req.session.loginUser) {   // 如果有token 判断token是否过期
+    const token = req.get("z-token");    // 从header获取token
+    if (token) {   // 如果有token 判断token是否过期
       const startTime = req.session.loginUser.startTime;
       const timeDifference = moment().diff(startTime, 'seconds');
       if (timeDifference > 3600) {   // token 超时
@@ -46,9 +47,7 @@ app.all('*', (req, res, next) => {
           code: 400,
           msg: 'token timeout'
         })
-        return;
       } else {
-        const token = req.get("z-token");    // 从header获取token
         jwt.verify(token, secret, (err) => {    // 验证 token
           if (err) {
             console.log(err);
@@ -61,9 +60,15 @@ app.all('*', (req, res, next) => {
           }
         });
       }
+    } else {  //  header 里面没 token
+      res.send({
+        code: 400,
+        msg: 'notfound token'
+      })
     }
+  } else {
+    next();
   }
-  next();
 })
 
 app.post('/login', (req, res) => {
@@ -89,6 +94,7 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   delete req.session.loginUser;
+  console.log('xxxxxxxxxxxxx')
   res.send({
     code: 200,
     msg: 'logout success'
