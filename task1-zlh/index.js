@@ -33,20 +33,34 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// 拦截器
 app.all('*', (req, res, next) => {
   const { path } = req;
   console.log(`visit path ${path}`);
   if (!path.includes('login')) {
     console.log('不是 login ');
     if (req.session.loginUser) {   // 如果有token 判断token是否过期
-      let startTime = req.session.loginUser.startTime;
-      let timeDifference = moment().diff(startTime, 'seconds');
+      const startTime = req.session.loginUser.startTime;
+      const timeDifference = moment().diff(startTime, 'seconds');
       if (timeDifference > 3600) {   // token 超时
         res.send({
           code: 400,
           msg: 'token timeout'
         })
         return;
+      } else {
+        const token = req.get("z-token");    // 从header获取token
+        jwt.verify(token, secret, (err) => {    // 验证 token
+          if (err) {
+            console.log(err);
+            res.send({
+              code: 400,
+              msg: 'error'
+            })
+          } else {
+            next();
+          }
+        });
       }
     }
   }
@@ -75,21 +89,10 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-  const token = req.get("z-token");       // 从header获取token
-  jwt.verify(token, secret, (err) => {
-    if (err) {
-      console.log(err);
-      res.send({
-        code: 400,
-        msg: 'error'
-      })
-    } else {
-      delete req.session.loginUser;
-      res.send({
-        code: 200,
-        msg: 'logout success'
-      })
-    }
+  delete req.session.loginUser;
+  res.send({
+    code: 200,
+    msg: 'logout success'
   })
 })
 
