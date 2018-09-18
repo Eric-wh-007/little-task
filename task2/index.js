@@ -18,7 +18,7 @@ class Page {
   }
   init() {
     this.page.appendChild(this.prev);
-    for(let i =0; i<this.pageNum; i++ ){
+    for (let i = 0; i < this.pageNum; i++) {
       let num = i + 1;
       let tmp = this.createItem(num, 'z__page-item', 'div');
       this.page.appendChild(tmp);
@@ -26,8 +26,8 @@ class Page {
     this.page.appendChild(this.next);
   }
   currentChange() {
-    this.next.removeAttribute ("disabled");
-    this.prev.removeAttribute ("disabled");
+    this.next.removeAttribute("disabled");
+    this.prev.removeAttribute("disabled");
     if (this.current === 1) {
       this.prev.setAttribute("disabled", true);
     } else if (this.current === this.pageNum) {
@@ -48,11 +48,11 @@ class Page {
       if (target.attributes.class.value === 'z__page-item') {
         this.current = parseInt(target.textContent);
         this.currentChange();
-      } else if(target.attributes.class.value === 'z__page-prev') {
-        if (this.current > 1) this.current --;
+      } else if (target.attributes.class.value === 'z__page-prev') {
+        if (this.current > 1) this.current--;
         this.currentChange();
-      } else if(target.attributes.class.value === 'z__page-next') {
-        if (this.current < this.pageNum) this.current ++;
+      } else if (target.attributes.class.value === 'z__page-next') {
+        if (this.current < this.pageNum) this.current++;
         this.currentChange();
       }
     })
