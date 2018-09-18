@@ -39,7 +39,7 @@ app.all('*', (req, res, next) => {
   console.log(`visit path ${path}`);
   if (!path.includes('login')) {
     const token = req.get("z-token");    // 从header获取token
-    if (token) {   
+    if (token && req.session.loginUser) {   
       const startTime = req.session.loginUser.startTime;
       const timeDifference = moment().diff(startTime, 'seconds');
       console.log(`距上次获取 session 过去了 ${timeDifference} s`);
@@ -95,7 +95,6 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   delete req.session.loginUser;
-  console.log('xxxxxxxxxxxxx')
   res.send({
     code: 200,
     msg: 'logout success'
@@ -104,7 +103,6 @@ app.post('/logout', (req, res) => {
 
 app.post('/test', (req, res) => {
   const { test } = req.body;
-  console.log(test, 'ssssssssss')
   if (test === 'test') {
     res.send({
       code: 200,
