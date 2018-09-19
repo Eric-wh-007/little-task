@@ -12,7 +12,7 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 1000 * 60 * 10 // 10分钟
+    maxAge: 1000 * 60 * 1 // 10分钟
   }
 }
 
@@ -68,6 +68,16 @@ app.post('/login', (req, res) => {
     });
   }
 });
+
+app.post('/data',(req,res) => {
+  const { loginUser } = req.session;
+  const { token } = req.body;
+  console.log('loginUser:  ', loginUser);
+
+  if(token) {
+    res.send('ok');
+  }
+})
 
 app.post('/logout', (req, res) => {
   const {token} = req.body;
