@@ -73,7 +73,14 @@ class Pagination {
     nextBtn.setAttribute('data-index', 'next');
     this.setStyle(nextBtn, this.defaultStyles)
     element.appendChild(nextBtn);
-
+    
+    // 页面刚刚渲染时 pre 没有 not-allowed 样式
+    if(this.currPageIndex === 1) { // 上一页禁用
+      this.setStyle(preBtn,this.disableStyles)
+    }
+    if(this.currPageIndex === btnCount) { //下一页禁用
+      this.setStyle(nextBtn,this.disableStyles)
+    }
 
     element.addEventListener('click', (e) => {
       // 拿到前一页 将要转换的页

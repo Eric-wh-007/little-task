@@ -1,0 +1,53 @@
+<template id="HelloWorld">
+  <style>
+    .active {
+      color: red;
+      animation: textShadow 1.5s infinite;
+    }
+    @keyframes textShadow {
+      0% {
+        text-shadow: 0 0 0 red;
+      }
+      50% {
+        text-shadow: 0 0 30px red;
+      }
+      100% {
+        text-shadow: 0 0 0 red;
+      }
+    }
+    p {
+      cursor: pointer;
+      font-size: 30px;
+    }
+  </style>
+  <p id="say"></p>
+</template>
+<script>
+    class HelloWorld extends HTMLElement {
+      constructor() {
+        super();
+        this.isActive = false;
+        const shadowRoot = this.attachShadow({
+          mode: 'open'
+        });
+        const propsText = this.getAttribute('text');
+        let template = document.currentScript.ownerDocument.querySelector('#HelloWorld').content;
+        let say = template.querySelector('#say');
+        say.textContent = propsText;
+        say.addEventListener('click', this.toggleColor.bind(this, say));
+        shadowRoot.appendChild(template);
+      }
+
+      toggleColor(say) {
+        if (this.isActive) {
+          say.classList.remove('active');
+        } else {
+          say.classList.add('active');
+        }
+        this.isActive = !this.isActive;
+      }
+    }
+
+    customElements.define('hello-world', HelloWorld);
+
+</script>
