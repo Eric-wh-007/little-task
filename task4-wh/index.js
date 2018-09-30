@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const schedule = require('node-schedule');
 
 const FuckZLH = () => {
 
@@ -51,4 +52,9 @@ const FuckZLH = () => {
   })
 }
 
-FuckZLH();
+
+
+schedule.scheduleJob('30 * * * * *', () => {
+  console.log('date: ',new Date())
+  // FuckZLH();
+})
