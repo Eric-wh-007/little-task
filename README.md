@@ -4,4 +4,5 @@
 # TsakList  
 1. 实现一个token登录验证 ✅ 
 2. 原生JS实现一个分页类 ✅ 
-3. 写一个web Component
+3. 写一个web Component ✅ 
+4. 写一个定时发邮件的程序 
