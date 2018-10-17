@@ -4,7 +4,6 @@ const moment = require('moment');
 
 const sendMail = (mail) => {
   //检测邮箱地址是否为空
-  console.log(mail)
   if (!mail) {
     return console.log('没有邮箱地址!');
   }
@@ -24,9 +23,10 @@ const sendMail = (mail) => {
   const mailOptions = {
     from: 'zlh <444920039@qq.com>', // sender address
     to: mail, // list of receivers
-    subject: `${moment().format('YYYY-MM-DD hh:mm')}——Go home for dinner`, // Subject line
+    subject: `${moment().format('YYYY-MM-DD hh:mm a')}——Go home for dinner`, // Subject line
     html: `<p>🍋 🍊 🍒 🍰 🍇 🍉 🍓 🌽 🍑</p>
-           <p>dadadadadadada ~ </p>`
+           <p>dadadadadadada ~ </p>
+           `
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -39,10 +39,11 @@ const sendMail = (mail) => {
   });
 }
 
-(function () {
-  //  从 左向右 分别代表 second 、 minute 、 hour 、 day of month 、 month 、 day of week
-  schedule.scheduleJob('0 0 18 * * *', () => { // 每天的 18：00 执行任务
-    console.log('scheduleCronstyle:' + new Date());
-    sendMail('932734303@qq.com');
-  });
-})();
+//  从 左向右 分别代表 second 、 minute 、 hour 、 day of month 、 month 、 day of week
+schedule.scheduleJob('0 0 18 * * *', () => { // 每天的 18：00 执行任务
+  console.log(' okok ~ 定时任务执行了 ~')
+  sendMail('932734303@qq.com');
+});
+// sendMail('444920039@qq.com');
+
+console.log('server start')
