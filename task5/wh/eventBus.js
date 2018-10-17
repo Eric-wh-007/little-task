@@ -41,11 +41,9 @@ class EventBus {
     if(typeof eventName !== 'string') {  
       throw new Error('eventName expected string');
     }
-    const fns = this.events[eventName];
-    if(fns) {
-      fns.forEach(fn => {
+    if(Reflect.has(this.events, eventName)) {
+      this.events[eventName].forEach(fn => {
         fn.call(this, ...arg);
-        console.log(...arg);
       });
     }
   }
@@ -70,7 +68,7 @@ class EventBus {
    * @memberof EventBus
    */
   offAll(eventName) {
-    delete this.events[eventName];
+    Reflect.deleteProperty(this.events, eventName)
   }
 }
 
