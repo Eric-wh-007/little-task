@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>layout4</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background: #666;
+    }
+
+    .wrapper {
+      width: 100%;
+      display: flex;
+    }
+
+    /* col 12等分 */
+    .col-2 {
+      flex: 2;
+    }
+
+    .col-8 {
+      flex: 8;
+    }
+
+    .left,
+    .right {
+      background: #ccc;
+    }
+
+    .center {
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="col-2">
+      <div class="left">
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="center">
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="right">
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+        <div>testtest</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
