@@ -1,0 +1,15 @@
+html,body {
+  height: 100%;
+  background-color:#5c5457; 
+}
+.main-bg {
+  background-color: #fff;
+}
+
+.sider-bg {
+  background-color: #8c8c8c;
+}
+
+.other-bg {
+  background-color: #e9e9e9;
+}
